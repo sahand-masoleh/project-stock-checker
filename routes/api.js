@@ -44,16 +44,19 @@ module.exports = function (app) {
 				}
 				let fans = (await User.find({ likes: stock })).length;
 				let response = {
-					stockdata: {
+					stockData: {
 						stock: data.symbol,
 						price: data.latestPrice,
 						likes: fans,
 					},
 				};
-				res.status(200).json(response);
+				res
+        // .status(200)
+        .json(response);
 			} catch (error) {
-				res.status(500);
-				res.send(error.message);
+				res
+        // .status(500)
+				.send(error.message);
 			}
 		} else {
 			let stocks = req.query.stock.map((stock) => stock.toUpperCase());
@@ -82,7 +85,7 @@ module.exports = function (app) {
 					fans[stocks[i]] = (await User.find({ likes: stocks[i] })).length;
 				}
 				let response = {
-					stockdata: [
+					stockData: [
 						{
 							stock: data[stocks[0]].symbol,
 							price: data[stocks[0]].latestPrice,
@@ -95,10 +98,13 @@ module.exports = function (app) {
 						},
 					],
 				};
-				res.status(200).json(response);
+				res
+        // .status(200)
+        .json(response);
 			} catch (error) {
-				res.status(500);
-				res.send(error.message);
+				res
+        // .status(500)
+				.send(error.message);
 			}
 		}
 	});
